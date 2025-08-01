@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { portfolioApi, type PortfolioInfo } from '../services/portfolioApi';
 
 const HomePage: React.FC = () => {
+  const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfo | null>(null);
+  const [backendStatus, setBackendStatus] = useState<string>('Checking...');
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // Check backend health
+        const health = await portfolioApi.checkHealth();
+        setBackendStatus(health);
+
+        // Get portfolio info
+        const info = await portfolioApi.getPortfolioInfo();
+        setPortfolioInfo(info);
+      } catch (error) {
+        console.error('Error loading data:', error);
+        setBackendStatus('Backend unavailable - using static data');
+      }
+    };
+
+    loadData();
+  }, []);
+
   return (
     <div className="page-container">
       <div className="home-content" style={{
@@ -31,7 +54,7 @@ const HomePage: React.FC = () => {
           fontSize: 'clamp(1rem, 2vw, 2rem)',
           fontWeight: '300'
         }}>
-          <h3>The Developer</h3>
+          <h3>{portfolioInfo?.title || 'The Developer'}</h3>
           <span style={{ fontSize: '1.2em' }}>→</span>
         </div>
         <p style={{ 
@@ -44,8 +67,24 @@ const HomePage: React.FC = () => {
           marginRight: 'clamp(2rem, 4vw, 4rem)',
           marginBottom: 'clamp(1rem, 2vw, 2rem)'
         }}>
-          Building intelligent backend systems with Java & Spring Boot
+          {portfolioInfo?.description || 'Building intelligent backend systems with Java & Spring Boot'}
         </p>
+        
+        {/* Backend Status Indicator */}
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          color: backendStatus.includes('Backend') ? '#4ade80' : '#ef4444',
+          padding: '8px 12px',
+          borderRadius: '8px',
+          fontSize: '0.75rem',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          zIndex: 1000
+        }}>
+          🚀 {backendStatus}
+        </div>
       </div>
     </div>
   );
