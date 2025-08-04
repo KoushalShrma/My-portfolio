@@ -41,6 +41,33 @@ const ProjectsPage: React.FC = () => {
         </div>
         
         <div style={{
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          padding: '2rem',
+          borderRadius: '4px',
+          transition: 'all 0.3s ease'
+        }} className="hover:border-white">
+          <h3 style={{ marginBottom: '1rem' }}>Portfolio API</h3>
+          <p style={{ marginBottom: '1rem' }}>
+            RESTful API backend for portfolio management with Neon PostgreSQL database
+          </p>
+          <div style={{ 
+            opacity: '0.7',
+            fontSize: '0.9rem',
+            marginBottom: '1rem'
+          }}>
+            <p>Technologies: Spring Boot, Neon Database, PostgreSQL, JPA</p>
+            <p>Role: Full-stack development & database design</p>
+          </div>
+          <p style={{ 
+            opacity: '0.8',
+            fontSize: '0.85rem',
+            color: '#64ffda'
+          }}>
+            Serverless PostgreSQL with automatic scaling
+          </p>
+        </div>
+        
+        <div style={{
           border: '1px solid rgba(255, 255, 255, 0.1)',
           padding: '2rem',
           borderRadius: '4px',

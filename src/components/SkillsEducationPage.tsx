@@ -33,6 +33,7 @@ const SkillsEducationPage: React.FC = () => {
               <li>Java</li>
               <li>Spring Boot</li>
               <li>MySQL</li>
+              <li>Neon Database</li>
             </ul>
           </div>
           
