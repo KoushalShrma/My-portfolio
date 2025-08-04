@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
           marginRight: 'clamp(2rem, 4vw, 4rem)',
           marginBottom: 'clamp(1rem, 2vw, 2rem)'
         }}>
-          Building intelligent backend systems with Java & Spring Boot
+          Building intelligent backend systems with Java, Spring Boot & Neon Database
         </p>
       </div>
     </div>
